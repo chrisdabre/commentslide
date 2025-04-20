@@ -1,10 +1,11 @@
 import React from 'react'
 
 type Props = {
-    children: React.ReactDOM
+    children: React.ReactNode
+    params: { slug: string }
 }
 
-const Layout = (props: Props) => {
+const Layout = ({children, params}: Props) => {
   return (
     <div>layout</div>
   )
