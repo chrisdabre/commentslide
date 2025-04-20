@@ -1,4 +1,4 @@
-import { BarChart3, Instagram, Send, Users, Zap } from 'lucide-react'
+import { BarChart3, Instagram, Send, User, Zap } from 'lucide-react'
 import React from 'react'
 import { Button } from '../ui/button'
 
@@ -8,7 +8,7 @@ const HeroSection = () => {
           <div className="container px-4 md:px-6">
               <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
                   <div className="space-y-6">
-                      <div className="inline-block rounded-full bg-pink-100 px-3 py-1 text-sm text-pink-600">
+                      <div className="inline-block rounded-full bg-red-100 px-3 py-1 text-sm text-red-600">
                           <span className="flex items-center gap-1">
                               <Instagram className="h-4 w-4" />
                               <span>Instagram Engagement Tool</span>
@@ -32,10 +32,10 @@ const HeroSection = () => {
                               See how it works
                           </Button>
                       </div>
-                      <div className="rounded-lg border bg-background/50 px-4 py-2 text-sm">
+                      <div className="rounded-lg bg-background/50 px-4 py-2 text-sm">
                           <p className="flex items-center gap-2">
                               <span className="flex h-2 w-2 rounded-full bg-green-500" />
-                              <span className="font-medium">10,000+ creators</span> are already using CommentDM
+                              <span className="font-medium">50+ creators are already using CommentSlide</span>
                           </p>
                       </div>
                   </div>
@@ -51,10 +51,10 @@ const HeroSection = () => {
                           <div className="p-6 space-y-6">
                               <div className="flex items-start gap-4">
                                   <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-                                      <Users className="h-5 w-5 text-gray-500" />
+                                      <User className="h-5 w-5 text-gray-500" />
                                   </div>
                                   <div className="flex-1 space-y-1">
-                                      <p className="text-sm font-medium">Fan comment detected</p>
+                                      <p className="text-sm font-medium">Comment detected</p>
                                       <div className="rounded-lg bg-gray-100 p-3">
                                           <p className="text-sm">I want to learn more about your presets! #info</p>
                                       </div>
