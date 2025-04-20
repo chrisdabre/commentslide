@@ -18,11 +18,6 @@ export const SIDEBAR_MENU: SidebarProps[] = [
     },
     {
         id: uuid(),
-        label: "contacts",
-        icon: <Contact />
-    },
-    {
-        id: uuid(),
         label: "automations",
         icon: <Activity />
     },
