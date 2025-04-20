@@ -5,7 +5,7 @@ import React from 'react'
 const Footer = () => {
   return (
       <footer className="border-t bg-background">
-          <div className="container px-4 md:px-6 py-12">
+          <div className="container px-4 md:px-6 py-10">
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
                   <div>
                       <div className="flex items-center gap-2 mb-4">
@@ -33,7 +33,7 @@ const Footer = () => {
                       <h3 className="text-sm font-medium mb-4">Product</h3>
                       <ul className="space-y-2 text-sm">
                           <li>
-                              <Link href="#" className="text-muted-foreground hover:text-foreground">
+                              <Link href="#features" className="text-muted-foreground hover:text-foreground">
                                   Features
                               </Link>
                           </li>
