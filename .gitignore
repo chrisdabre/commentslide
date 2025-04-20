@@ -15,9 +15,10 @@
 /build
 
 # Prisma
-/src/generated/prisma
+/src/generated
 *.dylib.node
 prisma/migrations/
+.env
 
 # misc
 .DS_Store
