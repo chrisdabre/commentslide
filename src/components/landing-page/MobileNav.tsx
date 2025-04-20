@@ -28,18 +28,12 @@ export function MobileNav() {
                     <Link href="#pricing" className="text-lg font-medium hover:text-primary" onClick={() => setOpen(false)}>
                         Pricing
                     </Link>
-                    <Link href="#testimonials" className="text-lg font-medium hover:text-primary" onClick={() => setOpen(false)}>
-                        Testimonials
-                    </Link>
-                    <Link href="#contact" className="text-lg font-medium hover:text-primary" onClick={() => setOpen(false)}>
-                        Contact
-                    </Link>
                     <div className="flex flex-col gap-2 mt-4 pt-4 border-t">
                         <Link href="/login" className="text-lg font-medium hover:text-primary" onClick={() => setOpen(false)}>
                             Log in
                         </Link>
                         <Button className="mt-2 w-full" onClick={() => setOpen(false)}>
-                            Start for free
+                            Sign Up
                         </Button>
                     </div>
                 </nav>

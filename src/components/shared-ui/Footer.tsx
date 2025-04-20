@@ -10,7 +10,7 @@ const Footer = () => {
                   <div>
                       <div className="flex items-center gap-2 mb-4">
                           <MessageCircle className="h-6 w-6 text-pink-500" />
-                          <span className="text-lg font-bold">CommentDM</span>
+                          <span className="text-lg font-bold">CommentSlide</span>
                       </div>
                       <p className="text-sm text-muted-foreground mb-4">
                           Automate your Instagram DMs with keyword triggers and boost engagement with your audience.
@@ -38,13 +38,8 @@ const Footer = () => {
                               </Link>
                           </li>
                           <li>
-                              <Link href="#" className="text-muted-foreground hover:text-foreground">
+                              <Link href="#pricing" className="text-muted-foreground hover:text-foreground">
                                   Pricing
-                              </Link>
-                          </li>
-                          <li>
-                              <Link href="#" className="text-muted-foreground hover:text-foreground">
-                                  Testimonials
                               </Link>
                           </li>
                           <li>

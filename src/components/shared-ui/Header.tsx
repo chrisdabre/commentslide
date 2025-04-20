@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Button } from '../ui/button'
 import Logo from '../ui/Logo'
-import { MobileNav } from './MobileNav'
+import { MobileNav } from '../landing-page/MobileNav'
 
 const NavItems = () => {
     return <>
@@ -14,12 +14,6 @@ const NavItems = () => {
         </Link>
         <Link href="#pricing" className="text-sm font-medium hover:text-primary">
             Pricing
-        </Link>
-        <Link href="#testimonials" className="text-sm font-medium hover:text-primary">
-            Testimonials
-        </Link>
-        <Link href="#contact" className="text-sm font-medium hover:text-primary">
-            Contact
         </Link>
     </>
 }
