@@ -5,7 +5,7 @@ const HowItWorks = () => {
       <section className="py-12 md:py-20" id="how-it-works">
           <div className="container px-4 md:px-6">
               <div className="text-center space-y-4 mb-12">
-                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">How CommentDM works</h2>
+                  <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">How CommentSlide works</h2>
                   <p className="mx-auto max-w-[700px] text-muted-foreground text-lg">
                       Three simple steps to automate your Instagram engagement
                   </p>
