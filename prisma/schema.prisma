@@ -15,19 +15,19 @@ datasource db {
 }
 
 model User{
-  id            String    @id @default(dbgenerated("gen_random_uuid(")")) @db.Uuid
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   clerkid       String    @unique
   email         String    @unique
   firstname     String?   @unique
   lastname      String?   @unique
   createdAt     DateTime  @default(now())
-  Subscription  Subscription?
-
+  subscription  Subscription?
+  Integrations  Integrations[]
   automations   Automation[] 
 }
 
 model Subscription {
-  id          String              @id @default(dbgenerated("gen_random_uuid(")")) @db.Uuid
+  id          String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   User        User?               @relation(fields: [userId], references: [id],onDelete: Cascade)
   userId      String?             @unique @db.Uuid
   createdAt   DateTime            @default(now())
@@ -37,7 +37,7 @@ model Subscription {
 }
 
 model Integrations {
-  id          String        @id @default(dbgenerated("gen_random_uuid(")")) @db.Uuid
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        INTEGRATIONS  @default(INSTAGRAM)
   createdAt   DateTime      @default(now())
   User        User?         @relation(fields: [userId], references: [id],onDelete: Cascade)
@@ -47,13 +47,18 @@ model Integrations {
   instagramId String?       @unique
 }
 
-model Automation{
-  id          String    @id @default(dbgenerated("gen_random_uuid(")")) @db.Uuid
+model Automation {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        String    @default("Untitled")
   createdAt   DateTime  @default(now())
   active      Boolean   @default(false)
-  User        User?     @relation(fields: [userId], references: [id],onDelete: Cascade)
+  trigger     Trigger[]
+  listener    Listener?
+  posts       Post[]
+  dms         Dms[]
+  User        User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String?   @unique @db.Uuid
+  keywords    Keyword[]
 }
 
 model Dms {
@@ -123,5 +128,3 @@ enum LISTENERS {
 enum INTEGRATIONS {
   INSTAGRAM
 }
-
-

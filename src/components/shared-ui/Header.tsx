@@ -27,10 +27,12 @@ const Header = () => {
                 <NavItems />
             </nav>
             <div className="flex items-center gap-5">
-                <Link href="/login" className="hidden md:block text-sm font-medium hover:text-primary">
+                <Link href="/sign-in" className="hidden md:block text-sm font-medium hover:text-primary">
                     Log in
                 </Link>
-                <Button>Sign Up</Button>
+                <Link href='/sign-up'>
+                    <Button>Sign Up</Button>
+                </Link>
                 <MobileNav />
             </div>
         </div>
