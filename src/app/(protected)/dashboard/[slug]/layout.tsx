@@ -15,7 +15,7 @@ const Layout = ({children, params}: Props) => {
     return (
     <div className='p-3'>
         {/* Sidebar */}
-        <Sidebar />
+        <Sidebar slug={params.slug}/>
     </div>
   )
 }
