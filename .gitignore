@@ -1,14 +1,3 @@
-# Prisma generated files
-src/generated/prisma
-
-# Other common files to ignore
-node_modules
-.env
-.env.*
-!.env.example
-
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
 /.pnp
@@ -25,6 +14,11 @@ node_modules
 # production
 /build
 
+# Prisma
+/src/generated/prisma
+*.dylib.node
+prisma/migrations/
+
 # misc
 .DS_Store
 *.pem
@@ -35,6 +29,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
+.env.*
+!.env.example
 .env*.local
 
 # vercel
