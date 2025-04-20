@@ -36,7 +36,7 @@ const Header = () => {
                 <Link href="/login" className="hidden md:block text-sm font-medium hover:text-primary">
                     Log in
                 </Link>
-                <Button>Start for free</Button>
+                <Button>Sign Up</Button>
                 <MobileNav />
             </div>
         </div>
