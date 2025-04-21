@@ -10,10 +10,11 @@ import ClerkAuthState from '../clerk-auth-state'
 import { Button } from "@/components/ui/button"
 import { SubscriptionPlan } from '../subscription-plan'
 import UpgradeCard from './Upgrade'
+import PaymentButton from '../payment-button'
 
 
 type Props = {
-  slug: string
+  slug: string,
 }
 
 const Sidebar = ({slug}: Props) => {
@@ -23,7 +24,7 @@ const Sidebar = ({slug}: Props) => {
     <div className='w-[250px] border-[1px] radial fixed left-0 lg:inline-block 
     border-[#545454] dark:border-[#545454]
     bg-gradient-to-b 
-    hidden#REMOVETHIS
+    hidden
     dark:from-[#768BDD] dark:via-[#171717] dark:to-[#768BDD]
     from-[#E8EFFF] via-white to-[#E8EFFF]
     bottom-0 top-0 m-3 rounded-3xl overflow-hidden'>
@@ -61,7 +62,7 @@ const Sidebar = ({slug}: Props) => {
             <p className='text-[#9B9CA0]'>Help</p>
           </div>
         </div>
-        <SubscriptionPlan>
+        <SubscriptionPlan type='FREE'>
           <div className='flex flex-1 flex-col justify-end'>
             <UpgradeCard />
           </div>
