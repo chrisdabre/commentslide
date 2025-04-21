@@ -2,7 +2,7 @@
 
 import { PAGE_BREAD_CRUMS } from '@/constants/pages'
 import { usePaths } from '@/hooks/use-nav'
-import { CircleHelpIcon, Menu, Search } from 'lucide-react'
+import { CircleHelpIcon, Menu } from 'lucide-react'
 import React from 'react'
 import Sheet from '../sheet'
 import Logo from '@/components/ui/Logo'
@@ -13,6 +13,7 @@ import ClerkAuthState from '../clerk-auth-state'
 import { SubscriptionPlan } from '../subscription-plan'
 import UpgradeCard from '../sidebar/Upgrade'
 import CreateAutomation from '../create-automation'
+import Search from '../search'
 
 type Props = {
     slug: string
@@ -34,7 +35,7 @@ const Navbar = ({slug}: Props) => {
                             <div className='flex gap-x-4 items-center p-6 justify-left'>
                                 <Logo />
                             </div>
-                            <div className='flex flex-col py-4'>
+                            <div className='flex flex-col py-3'>
                                 <Items page={page} slug={slug} />
                             </div>
                             <div className='px-20'>
@@ -60,7 +61,7 @@ const Navbar = ({slug}: Props) => {
                                 </div>
                             </div>
                             <SubscriptionPlan type='FREE'>
-                                <div className='pt-8 flex flex-1 flex-col justify-end'>
+                                <div className='flex flex-1 flex-col justify-end'>
                                     <UpgradeCard />
                                 </div>
                             </SubscriptionPlan>
