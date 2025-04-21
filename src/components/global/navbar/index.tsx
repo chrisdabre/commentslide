@@ -2,7 +2,7 @@
 
 import { PAGE_BREAD_CRUMS } from '@/constants/pages'
 import { usePaths } from '@/hooks/use-nav'
-import { CircleHelpIcon, Menu } from 'lucide-react'
+import { CircleHelpIcon, Menu, Search } from 'lucide-react'
 import React from 'react'
 import Sheet from '../sheet'
 import Logo from '@/components/ui/Logo'
@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import ClerkAuthState from '../clerk-auth-state'
 import { SubscriptionPlan } from '../subscription-plan'
 import UpgradeCard from '../sidebar/Upgrade'
+import CreateAutomation from '../create-automation'
 
 type Props = {
     slug: string
@@ -19,6 +20,7 @@ type Props = {
 
 const Navbar = ({slug}: Props) => {
     const { page } = usePaths()
+    /* 2:15:30 */
     const currentPage = PAGE_BREAD_CRUMS.includes(page) || 
     page == slug
   
@@ -28,7 +30,7 @@ const Navbar = ({slug}: Props) => {
                 <div className='flex gap-x-3 lg:gap-x-5 justify-end'>
                     <span className='lg:hidden flex items-center flex-1 gap-x-2'>
                         <Sheet trigger={<Menu />} className='lg:hidden'>
-                        <div className='flex flex-col h-full'>
+                            <div className='flex flex-col h-full'>
                             <div className='flex gap-x-4 items-center p-6 justify-left'>
                                 <Logo />
                             </div>
@@ -65,6 +67,8 @@ const Navbar = ({slug}: Props) => {
                         </div>
                         </Sheet>
                     </span>
+                    <Search />
+                    <CreateAutomation />
                 </div>
             </div>
         )

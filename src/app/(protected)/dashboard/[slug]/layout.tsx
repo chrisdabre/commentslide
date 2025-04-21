@@ -1,5 +1,7 @@
+import CreateAutomation from '@/components/global/create-automation'
 import Navbar from '@/components/global/navbar'
 import Sidebar from '@/components/global/sidebar'
+import { Search } from 'lucide-react'
 import React from 'react'
 
 type Props = {
