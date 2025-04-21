@@ -12,6 +12,8 @@ import { Button } from '@/components/ui/button'
 import ClerkAuthState from '../clerk-auth-state'
 import { SubscriptionPlan } from '../subscription-plan'
 import UpgradeCard from '../sidebar/Upgrade'
+import CreateAutomation from '../create-automation'
+import Search from '../search'
 
 type Props = {
     slug: string
@@ -19,6 +21,7 @@ type Props = {
 
 const Navbar = ({slug}: Props) => {
     const { page } = usePaths()
+    /* 2:15:30 */
     const currentPage = PAGE_BREAD_CRUMS.includes(page) || 
     page == slug
   
@@ -28,11 +31,11 @@ const Navbar = ({slug}: Props) => {
                 <div className='flex gap-x-3 lg:gap-x-5 justify-end'>
                     <span className='lg:hidden flex items-center flex-1 gap-x-2'>
                         <Sheet trigger={<Menu />} className='lg:hidden'>
-                        <div className='flex flex-col h-full'>
+                            <div className='flex flex-col h-full'>
                             <div className='flex gap-x-4 items-center p-6 justify-left'>
                                 <Logo />
                             </div>
-                            <div className='flex flex-col py-4'>
+                            <div className='flex flex-col py-3'>
                                 <Items page={page} slug={slug} />
                             </div>
                             <div className='px-20'>
@@ -58,13 +61,15 @@ const Navbar = ({slug}: Props) => {
                                 </div>
                             </div>
                             <SubscriptionPlan type='FREE'>
-                                <div className='pt-8 flex flex-1 flex-col justify-end'>
+                                <div className='flex flex-1 flex-col justify-end'>
                                     <UpgradeCard />
                                 </div>
                             </SubscriptionPlan>
                         </div>
                         </Sheet>
                     </span>
+                    <Search />
+                    <CreateAutomation />
                 </div>
             </div>
         )

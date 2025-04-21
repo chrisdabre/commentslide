@@ -1,5 +1,7 @@
+import CreateAutomation from '@/components/global/create-automation'
 import Navbar from '@/components/global/navbar'
 import Sidebar from '@/components/global/sidebar'
+import { Search } from 'lucide-react'
 import React from 'react'
 
 type Props = {
@@ -18,7 +20,7 @@ const Layout = ({children, params}: Props) => {
         {/* Sidebar */}
         <Sidebar slug={params.slug}/>
         {/* Navbar */}
-        <div className='lg:ml:[250px] lg:pl-10 lg:py-5 flex flex-col overflow-auto'>
+        <div className='lg:ml-[250px] lg:pl-10 lg:py-5 flex flex-col overflow-auto'>
             <Navbar slug={params.slug}/>
         </div>
     </div>
