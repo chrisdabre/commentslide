@@ -14,12 +14,13 @@ import { SubscriptionPlan } from '../subscription-plan'
 import UpgradeCard from '../sidebar/Upgrade'
 import CreateAutomation from '../create-automation'
 import Search from '../search'
+import Notifications from '../notifications-icon'
 
 type Props = {
     slug: string
 }
 
-const Navbar = ({slug}: Props) => {
+const Infobar = ({slug}: Props) => {
     const { page } = usePaths()
     /* 2:15:30 */
     const currentPage = PAGE_BREAD_CRUMS.includes(page) || 
@@ -70,10 +71,11 @@ const Navbar = ({slug}: Props) => {
                     </span>
                     <Search />
                     <CreateAutomation />
+                    <Notifications />
                 </div>
             </div>
         )
     )
 }
 
-export default Navbar
+export default Infobar
