@@ -12,7 +12,7 @@ const CreateAutomation = (props: Props) => {
              from-[#CC3804]
              font-medium
              to-[#D064AC]'>
-            <Loader state={false}>
+            <Loader state={false} className="">
                 <Activity />
                 <p className='lg:inline hidden'>Create Automation</p>
             </Loader>

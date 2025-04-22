@@ -6,16 +6,14 @@ import {
     SignInButton,
     UserButton
  } from '@clerk/nextjs'
- import { User } from 'lucide-react'
+ import { Loader2, Loader2Icon, LoaderIcon, User } from 'lucide-react'
  import Loader from '../loader'
 import { Button } from '@/components/ui/button'
 
 const ClerkAuthState = () => {
   return <>
     <ClerkLoading>
-        <Loader state className="">
-            <></>
-        </Loader>
+        <Loader2Icon className="animate-spin" />
     </ClerkLoading>
     <SignedOut>
         <SignInButton>

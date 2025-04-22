@@ -106,3 +106,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+.radial--gradient {
+  background-image: radial-gradient(ellipse farthest-side,
+      rgba(255, 0, 153, 0.15) 20%,
+      #0b090a 100%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.radial--gradient--pink {
+  background-image: radial-gradient(at center,
+      rgba(148, 52, 230, 0.1) 10%,
+      transparent 50%);
+  background-size: 70% 80%;
+  background-repeat: no-repeat;
+}
+
