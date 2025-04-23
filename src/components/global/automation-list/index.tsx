@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import React from 'react'
 import GradientButton from '../gradient-button'
+import { Button } from '@/components/ui/button'
 
 type Props = {}
 
@@ -44,9 +45,14 @@ const AutomationList = (props: Props) => {
                     <p className='capatalize text-sm text-muted-foreground'>
                         April 22, 2025 WIP
                     </p>
+                    {/* to do render the button based on the listener */}
                     <GradientButton type='BUTTON' className='w-full bg-background-BB text-white hover:bg-background-DB'>
                         SmartAI
                     </GradientButton>
+                    {/* If not smartai, show standard */}
+                    <Button className='bg-background-DB hover:bg-background-DB text-white'>
+                        Standard
+                    </Button>
                 </div>
         </Link>
     </div>
