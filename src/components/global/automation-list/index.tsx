@@ -39,13 +39,15 @@ const AutomationList = (props: Props) => {
                         No Keywords
                     </p>
                 </div>
+            </div>
                 <div className='flex flex-col justify-between'>
                     <p className='capatalize text-sm text-muted-foreground'>
                         April 22, 2025 WIP
                     </p>
-                        <GradientButton />
+                    <GradientButton type='BUTTON' className='w-full bg-background-BB text-white hover:bg-background-DB'>
+                        SmartAI
+                    </GradientButton>
                 </div>
-            </div>
         </Link>
     </div>
   )
