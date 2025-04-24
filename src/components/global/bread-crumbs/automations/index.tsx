@@ -3,9 +3,11 @@ import { ChevronRight, PencilIcon } from 'lucide-react'
 import React from 'react'
 import ActivateAutomationButton from '../../activate-automation-button'
 
-type Props = {}
+type Props = {
+  id: string
+}
 
-const AutomationBreadCrumb = (props: Props) => {
+const AutomationBreadCrumb = ( {id}: Props) => {
 
     //to do get automation data
     //
