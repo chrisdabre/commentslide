@@ -1,8 +1,14 @@
 import React from 'react'
 
-const page = () => {
+type Props = {}
+
+const page = async (props: Props) => {
+
+  const user = await onboardUser ()
+
+
   return (
-    <div>page</div>
+    <div>Dashboard</div>
   )
 }
 
