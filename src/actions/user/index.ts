@@ -2,7 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
-import { findUser } from "./queries"
+import { createUser, findUser } from "./queries"
 import { refreshToken } from "@/lib/fetch"
 import { updateIntegration } from "../integrations/queries"
 
@@ -16,7 +16,10 @@ export const onCurrentUser = async () => {
     return user
 }
 
+//get user data, refresh insta token
 export const onboardUser = async () => {
+    
+    //If a user is found:
     const user = await onCurrentUser()
 
     try{
@@ -49,6 +52,31 @@ export const onboardUser = async () => {
                     }
                 }
             }
+
+            return {
+                status: 200,
+                data: {
+                    firstname: found.firstname,
+                    lastname: found.lastname
+                }
+            }
         }
-    } catch (error) {}
+
+        //if !user; Create a user 
+        const created = await createUser(
+            user.id,
+            user.firstName!,
+            user.lastName!,
+            user.emailAddresses[0].emailAddress
+        )
+
+        return { 
+            status: 200, 
+            data: created
+        }
+
+    } catch (error) {
+        console.log(error)
+        return { status: 500 }
+    }
 }
