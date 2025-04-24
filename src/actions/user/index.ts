@@ -3,6 +3,8 @@
 import { currentUser } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import { findUser } from "./queries"
+import { refreshToken } from "@/lib/fetch"
+import { updateIntegration } from "../integrations/queries"
 
 //Validating a user
 export const onCurrentUser = async () => {
@@ -27,8 +29,24 @@ export const onboardUser = async () => {
 
                 if(days < 5) {
                     console.log('Refreshing token less than 5 days')
+                    //3:41:30
+                    const refresh = await refreshToken(
+                        found.Integrations[0].token
+                    )
 
-                    const refresh = await 
+                    const today = new Date ()
+                    const expire_date = today.setDate(today.getDate() + 60) //Giving the token time to expire
+                    //Then we update the token in our db and give the user the new token
+
+                    const update_token = await updateIntegration(
+                        refresh.access_token,
+                        new Date(expire_date),
+                        found.Integrations[0].id
+                    )
+                    
+                    if(!update_token) {
+                        console.log('Update token failed')
+                    }
                 }
             }
         }
