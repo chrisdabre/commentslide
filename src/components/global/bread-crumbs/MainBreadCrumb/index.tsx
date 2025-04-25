@@ -7,6 +7,14 @@ type Props = {
 }
 
 const MainBreadCrumb = ( { page, slug }: Props) => {
+  // Function to format the name with proper spacing
+  const formatName = (name: string | undefined) => {
+    if (!name) return '';
+    // Split the name by any existing spaces or camelCase
+    const parts = name.match(/[A-Z][a-z]+/g) || [name];
+    return parts.join(' ');
+  }
+
   return (
     <div className='flex flex-col items-start'>
         {page === 'Home' && (
@@ -15,7 +23,7 @@ const MainBreadCrumb = ( { page, slug }: Props) => {
                 <p className='text-text-secondary text-lg'>
                     Welcome Back,
                 </p>
-                <h2 className='capitalize text-4xl font-medium'>{slug}</h2>
+                <h2 className='capitalize text-4xl font-medium'>{formatName(slug)}</h2>
             </div>
         </div>
         )}
