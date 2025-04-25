@@ -25,7 +25,7 @@ const Layout = async ({children, params}: Props) => {
     await PrefetchUserAutomations(query)
   
     return (
-    //<HydrationBoundary state={ dehydrate(query) }>
+    <HydrationBoundary state={ dehydrate(query) }>
         <div className='p-3'>
             {/* Sidebar */}
             <Sidebar slug={params.slug} />
@@ -35,7 +35,7 @@ const Layout = async ({children, params}: Props) => {
                 {children}
             </div>
         </div>
-    //</HydrationBoundary>
+    </HydrationBoundary>
   )
 }
 

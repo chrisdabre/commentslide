@@ -1,10 +1,12 @@
 'use server'
 
+import { currentUser } from "@clerk/nextjs/server"
 import { onCurrentUser } from "../user"
-import { createAutomation } from "./queries"
+import { createAutomation, getAutomations } from "./queries"
 
 
-export const getAllAutomations = async () => {
+//create a new automation
+export const createAutomations = async () => {
     const user = await onCurrentUser()
 
     try{
@@ -27,6 +29,31 @@ export const getAllAutomations = async () => {
         return {
             status: 500,
             success: false,
+            data: 'Internal Server Error'
+        }
+    }
+}
+
+//get all the existing automations
+export const getAllAutomations = async () => {
+    const user = await onCurrentUser()
+
+    try {
+        const automations = await getAutomations(user.id)
+
+        if (automations) {
+            return {
+                stauts: 200,
+                data: automations.automations
+            }
+        }
+        return {
+            status: 404,
+            data: []
+        }
+    } catch (error) {
+        return {
+            status: 500,
             data: 'Internal Server Error'
         }
     }
