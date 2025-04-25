@@ -4,7 +4,7 @@ import Sidebar from '@/components/global/sidebar'
 import { Search } from 'lucide-react'
 import React from 'react'
 import { QueryClient } from '@tanstack/react-query'
-import { PrefetchUserProfile } from '@/react-query/prefetch'
+import { PrefetchUserAutomations, PrefetchUserProfile } from '@/react-query/prefetch'
 
 type Props = {
     children: React.ReactNode
@@ -21,6 +21,8 @@ const Layout = async ({children, params}: Props) => {
     const query = new QueryClient()
 
     await PrefetchUserProfile(query)
+
+    await PrefetchUserAutomations(query)
   
     return (
     <div className='p-3'>

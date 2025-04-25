@@ -14,12 +14,13 @@ const prefetch = async ( client: QueryClient, action: QueryFunction, key: string
     })
 }
 
+//Prefetching user profile
 export const PrefetchUserProfile = async ( client: QueryClient ) => {
     
     return await prefetch(client, onUserInfo , "user-profile")
 }
 
-
+//Prefetching user automations
 export const PrefetchUserAutomations = async (client: QueryClient ) => {
 
     return await prefetch(client, getAllAutomations ,'user-automations')
