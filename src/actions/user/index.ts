@@ -80,3 +80,30 @@ export const onboardUser = async () => {
         return { status: 500 }
     }
 }
+
+
+export const onUserInfo = async () => {
+    const user = await onCurrentUser()
+
+    try {
+        const profile = await findUser(user.id)
+
+        if (profile) {
+            return {
+                status: 200,
+                success: true,
+                data: profile
+            }
+        }
+
+        return {
+            status: 404,
+            success: false,
+            error: 'User Not Found'
+        }
+    } catch (error) {
+        return {
+            status: 500
+        }
+    }
+}
