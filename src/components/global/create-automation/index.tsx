@@ -2,11 +2,14 @@ import { Button } from '@/components/ui/button'
 import { Activity, Loader2 } from 'lucide-react'
 import React from 'react'
 import Loader from '../loader'
+import { useCreateAutomation } from '@/hooks/use-automations'
 
 type Props = {}
 
 const CreateAutomation = (props: Props) => {
   //Todo: Create the automation in db using mutate
+
+  const {} = useCreateAutomation()
     return (
         <Button className='lg:px-10 py-6 hover:opacity-80 text-white rounded-xl bg-gradient-to-br
              from-[#CC3804]

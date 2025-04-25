@@ -121,16 +121,22 @@ const AutomationList = (props: Props) => {
                     </div>
                     <div className='flex flex-col justify-between'>
                         <p className='capatalize text-sm text-muted-foreground'>
-                           {getMonth(automation.createdAt.getUTCMonth() + 1)}
+                           {getMonth(automation.createdAt.getUTCMonth() + 1)}{' '}
+                           {automation.createdAt.getUTCDate() === 1 
+                           ? `${automation.createdAt.getUTCDate()}st` 
+                           : `${automation.createdAt.getUTCDate()}th`}{' '}
+                           :{automation.createdAt.getFullYear()}
                         </p>
-                        {/* to do render the button based on the listener */}
-                        <GradientButton type='BUTTON' className='w-full bg-background-BB text-white hover:bg-background-DB'>
-                            SmartAI
-                        </GradientButton>
-                        {/* If not smartai, show standard */}
-                        <Button className='bg-background-DB hover:bg-background-DB text-white'>
-                            Standard
-                        </Button>
+                        {/* If it is not SmartAI return the standard button */}
+                        {automation.listener?.listener === 'SMARTAI' ? (
+                            <GradientButton type='BUTTON' className='w-full bg-background-BB text-white hover:bg-background-DB'>
+                                SmartAI
+                            </GradientButton>
+                        ) : (
+                            <Button className='bg-background-DB hover:bg-background-DB text-white'>
+                                Standard
+                            </Button>
+                        )}
                     </div>
                 </Link>
             ))}
