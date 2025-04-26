@@ -2,7 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server"
 import { onCurrentUser } from "../user"
-import { createAutomation, getAutomations } from "./queries"
+import { createAutomation, findAutomation, getAutomations } from "./queries"
 
 
 //create a new automation
@@ -51,6 +51,29 @@ export const getAllAutomations = async () => {
             status: 404,
             data: []
         }
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Internal Server Error'
+        }
+    }
+}
+
+export const getAutomationInfo = async (id: string) => {
+    await onCurrentUser()
+
+    try {
+        const automation = await findAutomation(id)
+
+        if (automation) return {
+            status: 200,
+            data: automation
+        }
+        return {
+            status: 404,
+            data: 'Oops! Something went wrong'
+        }
+
     } catch (error) {
         return {
             status: 500,

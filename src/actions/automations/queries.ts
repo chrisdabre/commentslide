@@ -39,3 +39,24 @@ export const getAutomations = async ( clerkId: string) => {
         },
     })
 }
+
+
+export const findAutomation = async (id: string) => {
+    return await client.automation.findUnique({
+        where: {
+            id,
+        },
+        include: {
+            keywords: true,
+            trigger: true,
+            posts: true,
+            listener: true,
+            User: {
+                select: {
+                    subscription: true,
+                    Integrations: true
+                },
+            },
+        },
+    })
+}
