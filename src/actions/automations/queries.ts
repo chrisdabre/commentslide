@@ -60,3 +60,21 @@ export const findAutomation = async (id: string) => {
         },
     })
 }
+
+//Used for updating the name of the automation
+//we use the where param so that it only updates the table of the specified id
+export const updateAutomation = async (
+    id: string,
+    update: {
+        name?: string,
+        active?: boolean
+    }
+) => {
+    return await client.automation.update({
+        where: { id },
+        data: {
+            name: update.name,
+            active: update.active
+        },
+    })
+}
