@@ -6,7 +6,7 @@ import { createAutomation, getAutomations } from "./queries"
 
 
 //create a new automation
-export const createAutomations = async () => {
+export const createAutomations = async (id?: string) => {
     const user = await onCurrentUser()
 
     try{
