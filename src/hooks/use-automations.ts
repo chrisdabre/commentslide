@@ -1,8 +1,8 @@
 import { createAutomations } from "@/actions/automations"
-import { useMutationData } from "./use-mutaations-data"
+import { useMutationData } from "./use-mutations-data"
 
 //we're giving it the keys, 'create-automation', function, and querykey
-export const useCreateAutomation = async () => {
+export const useCreateAutomation = () => {
     const { isPending, mutate } = useMutationData(
         ['create-automation'], 
         () => createAutomations(),

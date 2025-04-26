@@ -8,6 +8,7 @@ import GradientButton from '../gradient-button'
 import { Button } from '@/components/ui/button'
 import { useQueryAutomations } from '@/hooks/user-queries'
 import CreateAutomation from '../create-automation'
+import { useMutationData, useMutationDataState } from '@/hooks/use-mutations-data'
 
 type Props = {}
 
@@ -70,6 +71,10 @@ const AutomationList = (props: Props) => {
     const { data } = useQueryAutomations()
     //const { data }: { data?: AutomationResponse } = useQueryAutomations()
 
+    //4:36:40
+    const { latestVariable } = useMutationDataState(['create-automation'])
+    console.log(latestVariable)
+
     const { pathName } = usePaths()
 
     if (data?.status !== 200 || data.data.length <= 0) {
@@ -85,6 +90,7 @@ const AutomationList = (props: Props) => {
 
     return (
         <div className='flex flex-col gap-y-3'>
+            {/* @ts-ignore */}
             {data.data.map((automation: Automation) => (
                 <Link 
                     key={automation.id}

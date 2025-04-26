@@ -11,6 +11,7 @@ type Props = {}
 const CreateAutomation = (props: Props) => {
   //Todo: Create the automation in db using mutate
 
+  /* @ts-ignore */
   const { isPending, mutate } = useCreateAutomation()
     return (
         <Button className='lg:px-10 py-6 hover:opacity-80 text-white rounded-xl bg-gradient-to-br
