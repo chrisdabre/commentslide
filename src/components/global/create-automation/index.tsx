@@ -18,9 +18,11 @@ const CreateAutomation = (props: Props) => {
   //we use memo so that we can store the variable and not keep refreshing evetytime
   const mutationId = useMemo(() => v4(), []) //this will never refresh unless the dependency array [] changes
 
-  /* @ts-ignore */
-  const { isPending, mutate } = useCreateAutomation()
   console.log(mutationId)
+
+  
+  const { isPending, mutate } = useCreateAutomation(mutationId)
+  
 
 
     return (

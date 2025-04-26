@@ -70,7 +70,7 @@ const AutomationList = (props: Props) => {
     //Getting the automation data from the cached data
     const { data } = useQueryAutomations()
     //const { data }: { data?: AutomationResponse } = useQueryAutomations()
-
+    console.log(data)
     //4:36:40
     const { latestVariable } = useMutationDataState(['create-automation'])
     console.log(latestVariable)
@@ -90,8 +90,8 @@ const AutomationList = (props: Props) => {
 
     return (
         <div className='flex flex-col gap-y-3'>
-            {/* @ts-ignore */}
-            {data.data.map((automation: Automation) => (
+
+            {data.data!.map((automation: Automation) => (
                 <Link 
                     key={automation.id}
                     href={`${pathName}/${automation.id}`} 

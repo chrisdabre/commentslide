@@ -11,7 +11,7 @@ export const createAutomations = async (id?: string) => {
 
     try{
 
-        const create = await createAutomation(user.id)
+        const create = await createAutomation(user.id, id)
 
         if(create) return {
             status: 200,
@@ -43,7 +43,7 @@ export const getAllAutomations = async () => {
 
         if (automations) {
             return {
-                stauts: 200,
+                status: 200,  // Typo here: 'stauts' instead of 'status'
                 data: automations.automations
             }
         }
