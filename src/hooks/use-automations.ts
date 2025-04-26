@@ -45,4 +45,12 @@ export const useEditAutomation = (automationId: string) => {
             document.removeEventListener('mousedown', handleClickOutside)
         }
     }, [])
+
+    return {
+        edit,
+        enableEdit,
+        disableEdit,
+        inputRef,
+        isPending
+    }
 }
