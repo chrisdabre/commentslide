@@ -3,11 +3,12 @@
 import { usePaths } from '@/hooks/use-nav'
 import { cn, getMonth } from '@/lib/utils'
 import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
 import GradientButton from '../gradient-button'
 import { Button } from '@/components/ui/button'
 import { useQueryAutomations } from '@/hooks/user-queries'
 import CreateAutomation from '../create-automation'
+import { useMutationData, useMutationDataState } from '@/hooks/use-mutations-data'
 
 type Props = {}
 
@@ -69,6 +70,10 @@ const AutomationList = (props: Props) => {
     //Getting the automation data from the cached data
     const { data } = useQueryAutomations()
     //const { data }: { data?: AutomationResponse } = useQueryAutomations()
+    console.log(data)
+    //4:36:40
+    const { latestVariable } = useMutationDataState(['create-automation'])
+    console.log(latestVariable)
 
     const { pathName } = usePaths()
 
@@ -82,10 +87,20 @@ const AutomationList = (props: Props) => {
             </div>
         )
     }
+    //4:49:25
+    const optimisticData = useMemo(() => {
+        if (latestVariable?.variables) {
+            const test = [latestVariable.variables, ...data.data]
+
+            return { data: test }
+        }
+        return data
+    }, [latestVariable, data])
 
     return (
         <div className='flex flex-col gap-y-3'>
-            {data.data.map((automation: Automation) => (
+
+            {optimisticData.data!.map((automation: Automation) => (
                 <Link 
                     key={automation.id}
                     href={`${pathName}/${automation.id}`} 
@@ -121,16 +136,22 @@ const AutomationList = (props: Props) => {
                     </div>
                     <div className='flex flex-col justify-between'>
                         <p className='capatalize text-sm text-muted-foreground'>
-                           {getMonth(automation.createdAt.getUTCMonth() + 1)}
+                           {getMonth(automation.createdAt.getUTCMonth() + 1)}{' '}
+                           {automation.createdAt.getUTCDate() === 1 
+                           ? `${automation.createdAt.getUTCDate()}st` 
+                           : `${automation.createdAt.getUTCDate()}th`}{' '}
+                           :{automation.createdAt.getFullYear()}
                         </p>
-                        {/* to do render the button based on the listener */}
-                        <GradientButton type='BUTTON' className='w-full bg-background-BB text-white hover:bg-background-DB'>
-                            SmartAI
-                        </GradientButton>
-                        {/* If not smartai, show standard */}
-                        <Button className='bg-background-DB hover:bg-background-DB text-white'>
-                            Standard
-                        </Button>
+                        {/* If it is not SmartAI return the standard button */}
+                        {automation.listener?.listener === 'SMARTAI' ? (
+                            <GradientButton type='BUTTON' className='w-full bg-background-BB text-white hover:bg-background-DB'>
+                                SmartAI
+                            </GradientButton>
+                        ) : (
+                            <Button className='bg-background-DB hover:bg-background-DB text-white'>
+                                Standard
+                            </Button>
+                        )}
                     </div>
                 </Link>
             ))}

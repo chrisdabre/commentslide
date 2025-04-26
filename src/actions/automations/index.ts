@@ -2,16 +2,16 @@
 
 import { currentUser } from "@clerk/nextjs/server"
 import { onCurrentUser } from "../user"
-import { createAutomation, getAutomations } from "./queries"
+import { createAutomation, findAutomation, getAutomations } from "./queries"
 
 
 //create a new automation
-export const createAutomations = async () => {
+export const createAutomations = async (id?: string) => {
     const user = await onCurrentUser()
 
     try{
 
-        const create = await createAutomation(user.id)
+        const create = await createAutomation(user.id, id)
 
         if(create) return {
             status: 200,
@@ -43,7 +43,7 @@ export const getAllAutomations = async () => {
 
         if (automations) {
             return {
-                stauts: 200,
+                status: 200,  // Typo here: 'stauts' instead of 'status'
                 data: automations.automations
             }
         }
@@ -51,6 +51,29 @@ export const getAllAutomations = async () => {
             status: 404,
             data: []
         }
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Internal Server Error'
+        }
+    }
+}
+
+export const getAutomationInfo = async (id: string) => {
+    await onCurrentUser()
+
+    try {
+        const automation = await findAutomation(id)
+
+        if (automation) return {
+            status: 200,
+            data: automation
+        }
+        return {
+            status: 404,
+            data: 'Oops! Something went wrong'
+        }
+
     } catch (error) {
         return {
             status: 500,
