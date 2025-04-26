@@ -1,7 +1,11 @@
+'use client'
+
 import { Input } from '@/components/ui/input'
 import { ChevronRight, PencilIcon } from 'lucide-react'
 import React from 'react'
 import ActivateAutomationButton from '../../activate-automation-button'
+import { useQueryAutomation } from '@/hooks/user-queries'
+import { useEditAutomation } from '@/hooks/use-automations'
 
 type Props = {
   id: string
@@ -9,8 +13,13 @@ type Props = {
 
 const AutomationBreadCrumb = ( {id}: Props) => {
 
-    //to do get automation data
-    //
+    //to do get automation data 
+    //5:04:00
+    const { data } = useQueryAutomation(id)
+
+    //the double click edit for the automations: 5:04:28
+    const {} = useEditAutomation(id)
+    
   return (
     <div className='rounded-full w-full p-5 flex items-center bg-[#1818181A]'>
         <div className='flex items-center gap-x-3 min-w-0'>
