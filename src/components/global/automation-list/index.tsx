@@ -3,7 +3,7 @@
 import { usePaths } from '@/hooks/use-nav'
 import { cn, getMonth } from '@/lib/utils'
 import Link from 'next/link'
-import React from 'react'
+import React, { useMemo } from 'react'
 import GradientButton from '../gradient-button'
 import { Button } from '@/components/ui/button'
 import { useQueryAutomations } from '@/hooks/user-queries'
@@ -87,11 +87,20 @@ const AutomationList = (props: Props) => {
             </div>
         )
     }
+    //4:49:25
+    const optimisticData = useMemo(() => {
+        if (latestVariable?.variables) {
+            const test = [latestVariable.variables, ...data.data]
+
+            return { data: test }
+        }
+        return data
+    }, [latestVariable, data])
 
     return (
         <div className='flex flex-col gap-y-3'>
 
-            {data.data!.map((automation: Automation) => (
+            {optimisticData.data!.map((automation: Automation) => (
                 <Link 
                     key={automation.id}
                     href={`${pathName}/${automation.id}`} 

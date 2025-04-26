@@ -20,7 +20,7 @@ const CreateAutomation = (props: Props) => {
 
   console.log(mutationId)
 
-  
+
   const { isPending, mutate } = useCreateAutomation(mutationId)
   
 
@@ -29,7 +29,11 @@ const CreateAutomation = (props: Props) => {
         <Button className='lg:px-10 py-6 hover:opacity-80 text-white rounded-xl bg-gradient-to-br
              from-[#CC3804]
              font-medium
-             to-[#D064AC]' onClick={() => mutate({name: 'Untitled', id: mutationId, createdAt: new Date() })}>
+             to-[#D064AC]' onClick={() => mutate({
+              name: 'Untitled', 
+              id: mutationId, 
+              createdAt: new Date(), 
+              keywords: [] })}>
               {/* 4:39:58 */}
             <Loader state={isPending} className="">
                 <Activity />
