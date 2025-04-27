@@ -1,4 +1,4 @@
-import { createAutomations, saveListener, updateAutomationName } from "@/actions/automations"
+import { createAutomations, saveListener, saveTrigger, updateAutomationName } from "@/actions/automations"
 import { useMutationData } from "./use-mutations-data"
 import { useEffect, useRef, useState } from "react"
 import { z } from 'zod'
@@ -93,7 +93,18 @@ export const useTriggers = (id: string) => {
 
     const onSetTrigger = ((type: 'COMMENT' | 'DM') => dispatch(TRIGGER({trigger:{ type }})))
 
-    const { isPending, mutate} = useMutationData(['add-trigger', (data: {types: string[]}) => saveTrigger()])
+    const { isPending, mutate} = useMutationData(
+        ['add-trigger'], 
+        (data: {types: string[]}) => saveTrigger(id, data.types),
+        'automation-info'
+    )
 
     const onSaveTrigger = () => mutate({ types })
+
+    return {
+        types,
+        onSetTrigger,
+        onSaveTrigger,
+        isPending
+    }
 }
