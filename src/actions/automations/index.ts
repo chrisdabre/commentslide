@@ -2,7 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server"
 import { onCurrentUser } from "../user"
-import { createAutomation, findAutomation, getAutomations, updateAutomation } from "./queries"
+import { addListener, createAutomation, findAutomation, getAutomations, updateAutomation } from "./queries"
 
 
 //create a new automation
@@ -110,6 +110,38 @@ export const updateAutomationName = async (
         return {
             status: 500,
             success: false,
+            data: 'Internal Server Error'
+        }
+    }
+}
+
+//5:56:02
+export const saveListener = async (
+    automationId: string,
+    listener: 'SMARTAI' | 'MESSAGE',
+    prompt: string,
+    reply?: string
+) => {
+    await onCurrentUser()
+
+    try {
+        const create = await addListener(automationId, listener, prompt, reply)
+
+        if (create) {
+            return {
+                status: 200,
+                data: 'Listener Created',
+            }
+        }
+        return {
+            status: 404,
+            data: 'Cant save listener'
+        }
+
+
+    } catch( error ) {
+        return {
+            status: 500,
             data: 'Internal Server Error'
         }
     }

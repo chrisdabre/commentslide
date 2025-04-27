@@ -1,6 +1,7 @@
 'use server'
 
 import { client } from "@/lib/prisma"
+import { list } from "postcss"
 
 //creating the automations
 export const createAutomation = async ( clerkId: string, id?: string ) => {
@@ -75,6 +76,30 @@ export const updateAutomation = async (
         data: {
             name: update.name,
             active: update.active
+        },
+    })
+}
+
+
+export const addListener = async (
+    automationId: string,
+    listener: 'SMARTAI' | 'MESSAGE',
+    prompt: string,
+    reply?: string
+) => {
+
+    return await client.automation.update({
+        where: {
+            id: automationId,
+        },
+        data: {
+            listener: {
+                create: {
+                    listener,
+                    prompt,
+                    commentReply: reply,
+                },
+            },
         },
     })
 }
