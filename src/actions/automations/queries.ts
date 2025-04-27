@@ -132,3 +132,28 @@ export const addTrigger = async (automationId: string, trigger: string[]) => {
         },
     })
 }
+
+//6:41;15
+export const addKeyword = async (automationId: string, keyword: string) => {
+    return client.automation.update({
+        where: {
+            id: automationId,
+        },
+        data: {
+            keywords: {
+                create: {
+                    word: keyword,
+                },
+            },
+        },
+    })
+}
+
+
+//6;45;14
+
+export const deleteKeywordQuery = async (id: string) => {
+    return client.keyword.delete({
+        where: { id },
+    })
+}

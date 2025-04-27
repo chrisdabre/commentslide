@@ -2,7 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server"
 import { onCurrentUser } from "../user"
-import { addListener, addTrigger, createAutomation, findAutomation, getAutomations, updateAutomation } from "./queries"
+import { addKeyword, addListener, addTrigger, createAutomation, deleteKeywordQuery, findAutomation, getAutomations, updateAutomation } from "./queries"
 
 
 //create a new automation
@@ -165,6 +165,55 @@ export const saveTrigger = async (automationId: string, trigger: string[]) => {
         return {
             status: 500,
             data: 'Internal server error'
+        }
+    }
+}
+
+//6:41:09
+export const saveKeyword = async (automationId: string, keyword: string) => {
+    await onCurrentUser()
+
+    try {
+        const create = await addKeyword(automationId, keyword)
+
+        if (create) return {
+            status: 200,
+            data: 'Keyword Added Successfully'
+        }
+        return {
+            status: 404,
+            data: 'Something went wrong. Could not add the keyword'
+        }
+        
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Oops! Something went wrong'
+        }
+    }
+}
+
+
+//6:44:36
+export const deleteKeyword = async (id: string) => {
+    await onCurrentUser()
+
+    try {
+        const create = await deleteKeywordQuery(id)
+
+        if (create) return {
+            status: 200,
+            data: 'Keyword Deleted'
+        }
+        return {
+            status: 404,
+            data: 'Keyword not found'
+        }
+
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Oops! Something went wrong'
         }
     }
 }

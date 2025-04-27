@@ -9,6 +9,7 @@ import TriggerButton from '../trigger-button'
 import { AUTOMATION_TRIGGERS } from '@/constants/automation'
 import { useTriggers } from '@/hooks/use-automations'
 import { cn } from '@/lib/utils'
+import Keywords from './Keyword'
 
 type Props = {
     id: string
@@ -58,10 +59,14 @@ const Trigger = ( {id}: Props) => {
         ? 'bg-background-DB'
         : 'bg-gradient-to-br from-pink-700 font-medium to-pink-800'
       )}>
-        <div className='flex gap-x-2 items-center'>{trigger.icon}</div>
-        <p className='font-bold'>{trigger.label}</p>
+        <div className='flex gap-x-2 items-center'>
+          {trigger.icon}
+          <p className='font-bold'>{trigger.label}</p>
+        </div>
+        <p className='text-sm font-light'>{trigger.description}</p>
       </div>
     ))}
+    <Keywords id={id}/>
   </div>
  </TriggerButton>
 }
