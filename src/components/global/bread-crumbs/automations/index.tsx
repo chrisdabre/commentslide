@@ -53,7 +53,7 @@ const AutomationBreadCrumb = ( {id}: Props) => {
               </span>
         </div>
         <div className='flex items-center ml-auto gap-x-5 truncate'>
-              <p className='text-text-secondary/60 text-sm min-w-0 hidden md:block'>
+        <p className='text-text-secondary/60 text-sm min-w-0 hidden md:block truncate'>
                 All updates are automatically saved
             </p>
             <div className='flex gap-x-5 flex-shrink-0'>
