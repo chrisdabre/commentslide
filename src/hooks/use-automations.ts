@@ -141,3 +141,16 @@ export const useKeywords = (id: string) => {
     }
 
 }
+
+//7:13:55 This is for the user to select certain posts 
+export const useAutomationPosts = (id: string) => {
+    
+    const [posts, setPosts] = useState<
+    {
+        postid: string,
+        caption?: string,
+        media: string
+        mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
+    } []>([])
+
+}
