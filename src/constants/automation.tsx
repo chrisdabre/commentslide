@@ -50,7 +50,7 @@ export const AUTOMATION_TRIGGERS: AutomationTriggerProps[] = [
     },
     {
         id: v4(),
-        label: 'When the User Sends me a DM with a Keyword',
+        label: 'User Sends me a DM with a Keyword',
         icon: <LucideInstagram />,
         description: 'Select if you want to automate DMs on your profile',
         type: 'DM'

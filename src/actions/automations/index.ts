@@ -2,7 +2,8 @@
 
 import { currentUser } from "@clerk/nextjs/server"
 import { onCurrentUser } from "../user"
-import { addListener, createAutomation, findAutomation, getAutomations, updateAutomation } from "./queries"
+import { addKeyword, addListener, addTrigger, createAutomation, deleteKeywordQuery, findAutomation, getAutomations, updateAutomation } from "./queries"
+import { findUser } from "../user/queries"
 
 
 //create a new automation
@@ -143,6 +144,143 @@ export const saveListener = async (
         return {
             status: 500,
             data: 'Internal Server Error'
+        }
+    }
+}
+
+//6:30;19
+export const saveTrigger = async (automationId: string, trigger: string[]) => {
+    await onCurrentUser()
+
+    try {
+        const create = await addTrigger(automationId, trigger)
+        if(create) return {
+            status: 200,
+            data: 'Trigger Saved'
+        }
+        return {
+            status: 404,
+            data: 'Something went wrong. Could not save the trigger'
+        }
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Internal server error'
+        }
+    }
+}
+
+//6:41:09
+export const saveKeyword = async (automationId: string, keyword: string) => {
+    await onCurrentUser()
+
+    try {
+        const create = await addKeyword(automationId, keyword)
+
+        if (create) return {
+            status: 200,
+            data: 'Keyword Added Successfully'
+        }
+        return {
+            status: 404,
+            data: 'Something went wrong. Could not add the keyword'
+        }
+        
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Oops! Something went wrong'
+        }
+    }
+}
+
+
+//6:44:36
+export const deleteKeyword = async (id: string) => {
+    await onCurrentUser()
+
+    try {
+        const create = await deleteKeywordQuery(id)
+
+        if (create) return {
+            status: 200,
+            data: 'Keyword Deleted'
+        }
+        return {
+            status: 404,
+            data: 'Keyword not found'
+        }
+
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Oops! Something went wrong'
+        }
+    }
+}
+
+//7;09;03
+export const getProfilePosts = async () => {
+    const user = await onCurrentUser()
+
+    try {
+        const profile = await findUser(user.id)
+
+        const posts = await fetch(
+            `${process.env.INSTAGRAM_BASE_URL}/me/media?fields=id,caption,media_url,media_type,timestamp&limit=10&access_token=${profile?.Integrations[0].token}`
+        )
+
+        const parsed = await posts.json()
+
+        if(parsed) {
+            return {
+                stauts: 200,
+                data: 'Parsed'
+            }
+        }
+        console.log('🔴 Error in getting posts')
+        return {
+            status: 404,
+            data: 'Could not get the User profile details'
+        }
+
+    } catch (error) {
+        console.log('🔴 Server side error in getting posts', error)
+        return {
+            status: 500,
+            data: 'Oops! Something went wrong'
+        }
+    }
+}
+
+//7:17:55
+export const savePosts = async (
+    automationId: string,
+    posts: {
+        postid: string,
+        caption?: string,
+        media: string,
+        mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
+    } []
+) => {
+    await onCurrentUser()
+    try {
+        const create = await addPost(automationId, posts)
+
+        if(create) {
+            return {
+                status: 200,
+                data: 'Posts Attached'
+            }
+        }
+        return {
+            status: 404,
+            data: 'Automation Not Found'
+        }
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Oops! Something went wrong'
         }
     }
 }

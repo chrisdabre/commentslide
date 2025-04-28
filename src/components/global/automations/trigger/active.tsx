@@ -15,7 +15,7 @@ const ActiveTrigger = ( { keywords, type }: Props) => {
     <div className='bg-background-DB p-3 rounded-xl w-full'>
         <div className='flex gap-2 items-center'>
             {type === 'COMMENT' ? <InstagramIcon color='pink' /> : <SendHorizonal color='pink'/>}
-            <p className='text-lg'> {type === 'COMMENT' ? 'User Comments on my post' : 'Sends me a Direct Message'} </p>
+            <p className='text-lg'> {type === 'COMMENT' ? 'User Comments on my post' : 'User sends me a Direct Message'} </p>
         </div>
         <p className='text-text-secondary mt-2'>
             {type === 'COMMENT' ? 'If the user comments on a video/post that is setup to listen for keywords, this automation will fire' 

@@ -103,3 +103,81 @@ export const addListener = async (
         },
     })
 }
+
+
+//6;31;04
+export const addTrigger = async (automationId: string, trigger: string[]) => {
+    if(trigger.length === 2) {
+        return await client.automation.update({
+            where: {id: automationId},
+            data: {
+                trigger: {
+                    createMany: {
+                        data: [{type: trigger[0]} , {type: trigger[1] }],
+                    },
+                },
+            },
+        })
+    }
+    return await client.automation.update({
+        where: {
+            id: automationId,
+        },
+        data: {
+            trigger: {
+                create: {
+                    type: trigger[0],
+                },
+            },
+        },
+    })
+}
+
+//6:41;15
+export const addKeyword = async (automationId: string, keyword: string) => {
+    return client.automation.update({
+        where: {
+            id: automationId,
+        },
+        data: {
+            keywords: {
+                create: {
+                    word: keyword,
+                },
+            },
+        },
+    })
+}
+
+
+//6;45;14
+
+export const deleteKeywordQuery = async (id: string) => {
+    return client.keyword.delete({
+        where: { id },
+    })
+}
+
+//7:18:55
+export const addPost = async (
+    automationId: string,
+    posts: {
+        postid: string,
+        caption?: string,
+        media: string,
+        mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
+    }
+) => {
+    return await client.automation.update({
+        where: {
+            id: automationId,
+        },
+        data: {
+            posts: {
+                createMany: {
+                    data: posts,
+                },
+            },
+        },
+    })
+}
