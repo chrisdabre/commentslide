@@ -252,3 +252,35 @@ export const getProfilePosts = async () => {
         }
     }
 }
+
+//7:17:55
+export const savePosts = async (
+    automationId: string,
+    posts: {
+        postid: string,
+        caption?: string,
+        media: string,
+        mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
+    } []
+) => {
+    await onCurrentUser()
+    try {
+        const create = await addPost(automationId, posts)
+
+        if(create) {
+            return {
+                status: 200,
+                data: 'Posts Attached'
+            }
+        }
+        return {
+            status: 404,
+            data: 'Automation Not Found'
+        }
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Oops! Something went wrong'
+        }
+    }
+}

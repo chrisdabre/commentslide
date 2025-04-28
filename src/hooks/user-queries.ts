@@ -35,6 +35,6 @@ export const useQueryAutomationPosts = () => {
 
     return useQuery ({
         queryKey: ['instagram-media'],
-        queryFn: getAllAutomations,
+        queryFn: fetchPosts,
     })
 }
