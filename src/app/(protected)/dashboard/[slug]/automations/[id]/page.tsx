@@ -7,6 +7,7 @@ import { PrefetchUserAutomation } from '@/react-query/prefetch'
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 import { CircleAlert } from 'lucide-react'
 import React from 'react'
+import { AutomationResponse } from '@/types/automation'
 
 type Props = {
   params: { id: string}
@@ -20,7 +21,7 @@ export async function generateMetadata({
 }: {
   params: { id: string }
 }) {
-  const info = await getAutomationInfo(params.id)
+  const info = await getAutomationInfo(params.id) as AutomationResponse
   return {
     title: info.data?.name,
   }

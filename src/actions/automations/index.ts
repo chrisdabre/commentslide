@@ -2,7 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server"
 import { onCurrentUser } from "../user"
-import { addKeyword, addListener, addTrigger, createAutomation, deleteKeywordQuery, findAutomation, getAutomations, updateAutomation } from "./queries"
+import { addKeyword, addListener, addPost, addTrigger, createAutomation, deleteKeywordQuery, findAutomation, getAutomations, updateAutomation } from "./queries"
 import { findUser } from "../user/queries"
 
 
@@ -257,7 +257,7 @@ export const getProfilePosts = async () => {
 export const savePosts = async (
     automationId: string,
     posts: {
-        postid: string,
+        postId: string,
         caption?: string,
         media: string,
         mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
