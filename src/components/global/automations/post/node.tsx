@@ -18,6 +18,7 @@ const PostNode = ({id}: Props) => {
     
     //testing this to get rid of the typescript error. usually we just use data
     const automationData = typeof data?.data === 'object' ? data.data : null
+    
 
   return (
     data?.data && 

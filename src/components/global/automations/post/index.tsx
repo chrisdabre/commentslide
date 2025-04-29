@@ -17,6 +17,8 @@ const PostButton = ({id}: Props) => {
 
     const {data} = useQueryAutomationPosts()
 
+    const useQueryAutomationPostsData = typeof data?.data === 'object' ? data.data : null
+
     const {posts, onSelectPost, mutate, isPending} = useAutomationPosts(id)
     
     return (
@@ -30,13 +32,13 @@ const PostButton = ({id}: Props) => {
                                 key={post.id}
                                 onClick={() => 
                                     onSelectPost({
-                                        postid: post.id,
+                                        postId: post.id,
                                         media: post.media_url,
                                         mediaType: post.media_type,
                                         caption: post.caption
                                     })
                                 }>
-                                {posts.find((p) => p.postid === post.id) && (
+                                {posts.find((p) => p.postId === post.id) && (
                                 <CheckCircle
                                     fill='white'
                                     stroke='black'
@@ -49,7 +51,7 @@ const PostButton = ({id}: Props) => {
                                     alt='Instagram Image'
                                     className={cn(
                                         'hover:opacity-75 transition duration-100',
-                                        posts.find((p) => p.postid) && 'opacity-75'
+                                        posts.find((p) => p.postId === post.id) && 'opacity-75'
                                     )}/>
                             </div>
                         ))}

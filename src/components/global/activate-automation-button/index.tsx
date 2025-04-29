@@ -10,7 +10,8 @@ type Props = {
 const ActivateAutomationButton = ({id}: Props) => {
     /* to do setup optimiztic ui and fetch automation data */
 
-    //const {data} = useQueryAutomation(id)
+  //const {data} = useQueryAutomation(id)
+  
   return (
     <Button className='lg:px-10 mx-2 bg-gradient-to-br hover:opacity-80 text-white rounded-full from-[#CC3804] font-medium to-[#D064AC]'>
         
