@@ -147,7 +147,7 @@ export const useAutomationPosts = (id: string) => {
     
     const [posts, setPosts] = useState<
     {
-        postid: string,
+        postId: string,
         caption?: string,
         media: string
         mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
@@ -155,14 +155,14 @@ export const useAutomationPosts = (id: string) => {
     >([])
 
     const onSelectPost = (post: {
-        postid: string,
+        postId: string,
         caption?: string,
         media: string
         mediaType: 'IMAGE' | 'VIDEO' | 'CAROSEL_ALBUM'
     }) => {
         setPosts((prevItems) => {
-            if(prevItems.find((p) =>p.postid === post.postid)) {
-                return prevItems.filter((item) => item.postid !== post.postid)
+            if(prevItems.find((p) =>p.postId === post.postId)) {
+                return prevItems.filter((item) => item.postId !== post.postId)
             }
             else{
                 return [...prevItems, post]
