@@ -2,6 +2,7 @@ import { Input } from '@/components/ui/input'
 import { useKeywords } from '@/hooks/use-automations'
 import { useMutationDataState } from '@/hooks/use-mutations-data'
 import { useQueryAutomation } from '@/hooks/user-queries'
+import { useQuery } from '@tanstack/react-query'
 import { X } from 'lucide-react'
 import React from 'react'
 
@@ -16,15 +17,17 @@ const Keywords = ( { id }: Props) => {
 
     const { data } = useQueryAutomation(id)
 
+    const useQueryAutomationData = typeof data?.data === 'object' ? data.data : null
+
   return (
     <div className='bg-background-DB flex flex-col gap-y-3 p-3 rounded-xl'>
         <p className='text-sm text-text-secondary'>
             Add words that trigger automation
         </p>
         <div className='flex flex-wrap justify-start gap-2 items-center'> {/* 6:49:15 */}
-            {data?.data?.keywords && 
-            data?.data?.keywords.length > 0 && 
-            data?.data?.keywords.map((word) => word.id !== latestVariable.variables.id && (
+            {useQueryAutomationData?.keywords && 
+            useQueryAutomationData?.keywords.length > 0 && 
+            useQueryAutomationData?.keywords.map((word) => word.id !== latestVariable.variables.id && (
                 <div 
                 key={word.id}
                 className='bg-background-DB flex items-center gap-x-2 capitalize text-text-secondary py-1 rounded-full'>
