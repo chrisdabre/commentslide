@@ -48,7 +48,7 @@ const ThenNode = ( { id }: Props) => {
                 </div>
                     <p className='text-text-secondary'>{automationData.listener.prompt}</p>
             </div>
-            {data.data.posts.length > 0 ?( <></>) : (commentTrigger) ? ( <PostButton id={id}/> ) : (<></>)}
+            {automationData.posts.length > 0 ?( <></>) : (commentTrigger) ? ( <PostButton id={id}/> ) : (<></>)}
         </div>
     ) 
 }
