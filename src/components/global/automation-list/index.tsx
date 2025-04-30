@@ -135,12 +135,14 @@ const AutomationList = (props: Props) => {
                         
                     </div>
                     <div className='flex flex-col justify-between'>
-                        <p className='capatalize text-sm text-muted-foreground'>
+                        <p className='capitalize text-sm text-muted-foreground'>
                            {getMonth(automation.createdAt.getUTCMonth() + 1)}{' '}
-                           {automation.createdAt.getUTCDate() === 1 
-                           ? `${automation.createdAt.getUTCDate()}st` 
-                           : `${automation.createdAt.getUTCDate()}th`}{' '}
-                           :{automation.createdAt.getFullYear()}
+                           {automation.createdAt.getUTCDate()}
+                           {(automation.createdAt.getUTCDate() % 10 === 1 && automation.createdAt.getUTCDate() !== 11) ? 'st'
+                           : (automation.createdAt.getUTCDate() % 10 === 2 && automation.createdAt.getUTCDate() !== 12) ? 'nd'
+                           : (automation.createdAt.getUTCDate() % 10 === 3 && automation.createdAt.getUTCDate() !== 13) ? 'rd'
+                           : 'th'}{' '}
+                           {automation.createdAt.getFullYear()}
                         </p>
                         {/* If it is not SmartAI return the standard button */}
                         {automation.listener?.listener === 'SMARTAI' ? (
