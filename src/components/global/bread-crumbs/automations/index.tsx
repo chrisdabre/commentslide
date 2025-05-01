@@ -7,6 +7,7 @@ import ActivateAutomationButton from '../../activate-automation-button'
 import { useQueryAutomation } from '@/hooks/user-queries'
 import { useEditAutomation } from '@/hooks/use-automations'
 import { useMutationDataState } from '@/hooks/use-mutations-data'
+import AutomationEditInfobar from '../../automation-edit-infobar'
 
 type Props = {
   id: string
@@ -25,7 +26,8 @@ const AutomationBreadCrumb = ( {id}: Props) => {
     
   return (
     <div className='rounded-full w-full p-5 flex items-center bg-[#1818181A]'>
-        <div className='flex items-center gap-x-3 min-w-0'>
+      <AutomationEditInfobar slug={id} />
+        <div className='flex items-center gap-x-3 min-w-0 mx-3 lg:mx-0'>
             <p className='text-[#9B9CA0] truncate'>
                 Automations
             </p>
@@ -56,9 +58,9 @@ const AutomationBreadCrumb = ( {id}: Props) => {
         <p className='text-text-secondary/60 text-sm min-w-0 hidden md:block truncate'>
                 All updates are automatically saved
             </p>
-            <div className='flex gap-x-5 flex-shrink-0'>
+            {/* <div className='flex gap-x-5 flex-shrink-0'>
                 <p className='text-text-secondary text-sm truncate min-w-0'>Changes Saved</p>
-            </div>
+            </div> */}
         </div>
         <ActivateAutomationButton id={id}/>
     </div>

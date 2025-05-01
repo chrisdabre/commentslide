@@ -35,10 +35,9 @@ const CreateAutomation = (props: Props) => {
               createdAt: new Date(), 
               keywords: [] })}>
               {/* 4:39:58 */}
-            <Loader state={isPending} className="">
+              {isPending && <Loader2 className='animate-spin'/>}
                 <Activity />
                 <p className='lg:inline hidden'>Create Automation</p>
-            </Loader>
         </Button>
   )
 }

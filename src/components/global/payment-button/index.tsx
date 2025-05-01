@@ -1,8 +1,12 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import React from 'react'
 
 const PaymentButton = () => {
-    //Todo loading state
+  
+  //const {} = useSubscription()
+
   return (
     <Button className="bg-gradient-to-r 
     from-[#CC3804] to-[#D064AC] hover:opacity-90 

@@ -284,3 +284,30 @@ export const savePosts = async (
         }
     }
 }
+
+//7;33;37
+export const activateAutomation = async (
+    id: string,
+    state: boolean
+) => {
+    await onCurrentUser()
+    try {
+        const update = await updateAutomation(id, {active: state})
+
+        if(update) {
+            return {
+                status: 200,
+                data: `Automation ${state ? 'activated' : 'disabled'}`
+            }
+        }
+        return {
+            status: 404,
+            data: 'Automation Not Found'
+        }
+    } catch (error) {
+        return {
+            status: 500,
+            data: 'Oops! Something went wrong'
+        }
+    }
+}
