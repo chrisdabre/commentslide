@@ -20,6 +20,16 @@ export async function GET() {
                 },
             ],
             success_url: `${process.env.NEXT_PUBLIC_HOST_URL}/payment?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${process.env.NEXT_PUBLIC_HOST_URL}/payment?cancel=true`,
         })
+
+        if (session) {
+            return NextResponse.json({
+                status: 200,
+                session_url: session.url,
+            })
+        }
+
+        return NextResponse.json({status: 404})
  
 }
