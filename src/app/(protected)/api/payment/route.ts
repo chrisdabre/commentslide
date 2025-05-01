@@ -1,0 +1,2 @@
+import stripe from 'stripe'
+
