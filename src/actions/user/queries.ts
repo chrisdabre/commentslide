@@ -40,3 +40,23 @@ export const createUser = async (clerkId: string, firstname: string, lastname: s
         }
     })
 }
+
+
+//7;54;42
+export const updateSubscription = async (clerkId: string, props: { customerId?: string; plan?: 'PRO' | 'FREE' }) => {
+
+    return await client.user.update({
+        where: {
+            clerkid: clerkId,
+        },
+        data: {
+            subscription: {
+                update: {
+                    data: {
+                        ...props
+                    },
+                },
+            },
+        },
+    })
+}
