@@ -2,6 +2,8 @@ import { matchKeyword } from "@/actions/webhook/queries";
 import { NextRequest, NextResponse } from "next/server";
 
 
+//8:22:57 he says that there are additional things in the premium repo where they make the app prod ready
+
 //8:13:23
 //Method used to validate the webhook: Required by Instagram
 export async function GET(req: NextRequest) {
@@ -22,6 +24,16 @@ export async function POST(req: NextRequest) {
         //for comments
         if(webhook_payload.entry[0].changes){
             matcher = await matchKeyword(webhook_payload.entry[0].changes[0].value.text)
+        }
+
+        if(matcher && matcher.automationId){
+            //we have the keyword match
+            //check if it's a comment or message
+
+            if(webhook_payload.entry[0].messaging){
+                
+                const automation = await getKeywordAutomation()
+            }
         }
 
     } catch (error) {
