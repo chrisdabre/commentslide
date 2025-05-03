@@ -13,7 +13,7 @@ export const matchKeyword = async (keyword: string) => {
     })
 }
 
-//8:25;27
+//8:25;27 FOr a specific automation we're etting some values 8:47:46
 export const getKeywordAutomation = async (automationId: string, dm: boolean) => {
     return await client.automation.findUnique({
         where: {
@@ -87,4 +87,59 @@ export const createChatHistory = (automationId: string, sender: string, receiver
             },
         },
     })
+}
+
+//8:49:00
+//we find the post from the post table
+//where it is of the postid and it has the same automationid
+//select automationid and set it to trye
+export const getKeywordPost = async (postId: string, automationId: string) => {
+    return await client.post.findFirst({
+        where: {
+            AND: [{ postId: postId }, {automationId}],
+        },
+        select: { automationId: true }
+    })
+}
+
+
+//THIS NEEDS TO BE LOOKED INTO
+export const getChatHistory = async (recipientId: string, senderId: string) => {
+    const chats = await client.automation.findFirst({
+        where: {
+            dms: {
+                some: {
+                    AND: [
+                        { receiver: senderId },
+                        { senderId: recipientId }
+                    ]
+                }
+            }
+        },
+        select: {
+            id: true,
+            dms: {
+                select: {
+                    message: true,
+                    createdAt: true,
+                    senderId: true,
+                    receiver: true
+                },
+                orderBy: {
+                    createdAt: 'asc'
+                }
+            }
+        }
+    });
+
+    // Format the chat history for OpenAI conversation
+    const history = chats?.dms.map(chat => ({
+        role: chat.senderId === recipientId ? 'assistant' : 'user',
+        content: chat.message
+    })) ?? [];
+
+    return {
+        automationId: chats?.id,
+        history
+    };
 }
