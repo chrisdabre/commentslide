@@ -16,6 +16,7 @@ export async function GET(req: NextRequest) {
 
 //Matches the keyword commented on the post with the one set in the automation
 export async function POST(req: NextRequest) {
+    //getting the request payload
     const webhook_payload = await req.json()
     let matcher 
     
@@ -103,9 +104,34 @@ export async function POST(req: NextRequest) {
                                 smart_ai_message.choices[0].message.content,
                                 automation.User?.Integrations[0].token!
                             )
+
+                            if (direct_message.status === 200) {
+                                const tracked = await trackResponses(automation.id, 'DM')
+
+                                if (tracked) {
+                                    return NextResponse.json(
+                                        {
+                                            message: 'Message send',
+                                        },
+                                        {
+                                            status: 200
+                                        }
+                                    )
+                                }
+                            }
                         }
                     }
                 }
+            }
+            //8:46:43 Checks if the sent payload is a comments type payload
+            if (
+                webhook_payload.entry[0].changes &&
+                webhook_payload.entry[0].changes[0].field === 'comments'
+            ) {
+                const automation = await getKeywordAutomation(
+                    matcher.automationId,
+                    false
+                )
             }
         }
 

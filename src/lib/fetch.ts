@@ -7,7 +7,7 @@ export const refreshToken = async (token: string) => {
     return refresh_token.data
 }
 
-//8:29:19
+//8:29:19 sending the instagram message
 export const sendDM = async (userId: string, receiverId: string, prompt: string, token: string) => {
     console.log('sending message')
     
