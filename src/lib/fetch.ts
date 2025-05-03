@@ -66,3 +66,26 @@ export const generateTokens = async (code: string) => {
     }
 
 }
+
+
+//9:43:15
+export const sendPrivateMessage = async (userId: string, receiverId: string, prompt: string, token: string) => {
+    console.log('sending message')
+    
+    return await axios.post(`${process.env.INSTAGRAM_BASE_URL}/${userId}/${userId}/messages`, 
+        {
+            recipient: {
+                comment_id: receiverId,
+            },
+            message: {
+                text: prompt,
+            },
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        },
+    )
+}
