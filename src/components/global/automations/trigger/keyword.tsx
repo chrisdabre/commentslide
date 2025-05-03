@@ -22,7 +22,7 @@ const Keywords = ( { id }: Props) => {
   return (
     <div className='bg-background-DB flex flex-col gap-y-3 p-3 rounded-xl'>
         <p className='text-sm text-text-secondary'>
-            Add words that trigger automation
+            Add words that trigger automation. Press Enter to save
         </p>
         <div className='flex flex-wrap justify-start gap-2 items-center'> {/* 6:49:15 */}
             {useQueryAutomationData?.keywords && 
@@ -32,7 +32,7 @@ const Keywords = ( { id }: Props) => {
                 key={word.id}
                 className='bg-background-DB flex items-center gap-x-2 capitalize text-text-secondary py-1 rounded-full'>
                     <p>{word.word}</p>
-                    <X size={20} onClick={() => deleteMutation( {id: word.id})}/>
+                    <X size={20} className='cursor-pointer' onClick={() => deleteMutation( {id: word.id})}/>
                 </div>
             )
             )}
@@ -45,7 +45,7 @@ const Keywords = ( { id }: Props) => {
             <Input placeholder='Add keyword...' 
             style={{width: Math.min(Math.max(keyword.length || 10, 2), 50) + 'ch',}}
             value={keyword}
-            className='p-0 bg-transparent ring-0 border-none outline-none'
+            className='p-0 bg-transparent ring-0 border-none outline-none cursor-text'
             onChange={onValueChange}
             onKeyUp={onKeyPress}/>
         </div>
