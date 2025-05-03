@@ -1,8 +1,9 @@
 import { getKeywordAutomation, matchKeyword, trackResponses } from "@/actions/webhook/queries";
 import { sendDM } from "@/lib/fetch";
 import { NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
 
-
+const openai = new OpenAI();
 //8:22:57 he says that there are additional things in the premium repo where they make the app prod ready
 
 //8:13:23
@@ -64,7 +65,15 @@ export async function POST(req: NextRequest) {
                     //smart ai path only if the user has a pro plan
                     if(automation.listener && automation.listener.listener === 'SMARTAI' && automation.User?.subscription?.plan === 'PRO') {
                         
-                        const smart_ai_message = 
+                        const smart_ai_message = await openai.chat.completions.create({
+                            model: 'gpt-4o',
+                            messages: [
+                                {
+                                    role: 'assistant',
+                                    content: `${automation.listener?.prompt}: Keep responses under 2 sentences`
+                                }
+                            ]
+                        })
                     }
                 }
             }
