@@ -1,4 +1,4 @@
-import { matchKeyword } from "@/actions/webhook/queries";
+import { getKeywordAutomation, matchKeyword } from "@/actions/webhook/queries";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -31,8 +31,15 @@ export async function POST(req: NextRequest) {
             //check if it's a comment or message
 
             if(webhook_payload.entry[0].messaging){
+
+                const automation = await getKeywordAutomation(matcher.automationId, true)
                 
-                const automation = await getKeywordAutomation()
+                //if we have the automation. fire the automation. we have 2 paths, direct message and Smart AI
+                if(automation && automation.trigger){
+                    if(automation.listener && automation.listener.listener === 'MESSAGE'){
+                        const direct_message = await sendDM()
+                    }
+                }
             }
         }
 
