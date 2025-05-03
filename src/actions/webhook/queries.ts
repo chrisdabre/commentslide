@@ -105,11 +105,11 @@ export const getKeywordPost = async (postId: string, automationId: string) => {
 
 //NEEDS to be looked into
 // New function to get chat history
-export const getChatHistory = async (pageId: string, userId: string) => {
+export const getChatHistory = async (senderid: string, reveiver: string) => {
     const messages = await client.dms.findMany({
         where: {
-            senderId: pageId, // Assuming senderId stores the Page ID
-            receiver: userId, // Assuming receiver stores the User ID
+            senderId: senderid, 
+            receiver: reveiver,
         },
         orderBy: {
             createdAt: 'asc',
