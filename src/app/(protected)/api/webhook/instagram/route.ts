@@ -1,5 +1,6 @@
-import { getKeywordAutomation, matchKeyword, trackResponses } from "@/actions/webhook/queries";
+import { createChatHistory, getKeywordAutomation, matchKeyword, trackResponses } from "@/actions/webhook/queries";
 import { sendDM } from "@/lib/fetch";
+import { client } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
@@ -77,11 +78,30 @@ export async function POST(req: NextRequest) {
 
                         //8:39:58
                         if(smart_ai_message.choices[0].message.content) {
-                            const reveiver = createChatHistory(
+                            const receiver = createChatHistory(
                                 automation.id,
                                 webhook_payload.entry[0].id,
                                 webhook_payload.entry[0].messaging[0].sender.id,
                                 webhook_payload.entry[0].messaging[0].message.text
+                            )
+
+                            const sender = createChatHistory(
+                                automation.id,
+                                webhook_payload.entry[0].id,
+                                webhook_payload.entry[0].messaging[0].sender.id,
+                                smart_ai_message.choices[0].message.content
+                            )
+
+                            //we create a transaction if the client flow fails. but we still have to send messages
+                            //8:42:22
+                            await client.$transaction([receiver, sender])
+
+                            //sending the actual DM
+                            const direct_message = await sendDM(
+                                webhook_payload.entry[0].id,
+                                webhook_payload.entry[0].messaging[0].sender.id,
+                                smart_ai_message.choices[0].message.content,
+                                automation.User?.Integrations[0].token!
                             )
                         }
                     }
