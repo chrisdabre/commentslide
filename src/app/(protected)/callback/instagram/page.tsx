@@ -1,3 +1,4 @@
+import { onIntegrate } from '@/actions/integrations'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
@@ -16,13 +17,10 @@ const Page = async ( {searchaParams: { code }}: Props) => {
         const user = await onIntegrate(code.split('#_')[0])
 
         if(user.status === 200) {
-            return redirect(`/dashboard/${user.data?.firstname}${user.data?.lastname}`)
+            return redirect(`/dashboard/${user.data?.firstname}${user.data?.lastname}/integrations`)
         } 
     }
-
-  return (
-    <div>Page</div>
-  )
+    return redirect('/sign-up')
 }
 
 export default Page
