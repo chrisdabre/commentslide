@@ -1,4 +1,5 @@
-import { getKeywordAutomation, matchKeyword } from "@/actions/webhook/queries";
+import { getKeywordAutomation, matchKeyword, trackResponses } from "@/actions/webhook/queries";
+import { sendDM } from "@/lib/fetch";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -37,7 +38,33 @@ export async function POST(req: NextRequest) {
                 //if we have the automation. fire the automation. we have 2 paths, direct message and Smart AI
                 if(automation && automation.trigger){
                     if(automation.listener && automation.listener.listener === 'MESSAGE'){
-                        const direct_message = await sendDM()
+                        const direct_message = await sendDM(
+                            webhook_payload.entry[0].id, 
+                            webhook_payload.entry[0].messaging[0].sender.id,
+                            automation.listener?.prompt,
+                            automation.User?.Integrations[0].token!,
+                        )
+
+                        //11:06:04 we also need to check a bunch of conditions like if a user is a first time or a returning and if they're using a different post later
+                        if(direct_message.status === 200) {
+                            const tracked = await trackResponses(automation.id, 'DM')
+
+                            if(tracked){
+                                return NextResponse.json(
+                                    {
+                                        message: 'Message Send',
+                                    },
+                                    {
+                                        status: 200
+                                    },
+                                )
+                            }
+                        }
+                    }
+                    //smart ai path only if the user has a pro plan
+                    if(automation.listener && automation.listener.listener === 'SMARTAI' && automation.User?.subscription?.plan === 'PRO') {
+                        
+                        const smart_ai_message = 
                     }
                 }
             }
