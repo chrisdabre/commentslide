@@ -9,6 +9,10 @@ type Props = {
 }
 
 const IntegrationCard = ( { title, description, icon, strategy }: Props) => {
+
+  const onInstaOAuth = () => onOAuthInstagram(strategy)
+
+
   return (
       <div className='border-2 border-[#cc33ba] rounded-2xl gap-x-5 p-5 flex items-center justify-between'>
         {icon}
