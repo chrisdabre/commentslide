@@ -70,3 +70,21 @@ export const trackResponses = async (automationId: string, type: 'COMMENT' | 'DM
         })
     }
 }
+
+//8:40:59
+export const createChatHistory = (automationId: string, sender: string, receiver: string, message: string) => {
+    return client.automation.update({
+        where: {
+            id: automationId,
+        },
+        data: {
+            dms: {
+                create: {
+                    receiver,
+                    senderId: sender,
+                    message
+                },
+            },
+        },
+    })
+}

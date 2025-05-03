@@ -64,16 +64,26 @@ export async function POST(req: NextRequest) {
                     }
                     //smart ai path only if the user has a pro plan
                     if(automation.listener && automation.listener.listener === 'SMARTAI' && automation.User?.subscription?.plan === 'PRO') {
-                        
+                        //8:39:58
                         const smart_ai_message = await openai.chat.completions.create({
                             model: 'gpt-4o',
                             messages: [
                                 {
                                     role: 'assistant',
                                     content: `${automation.listener?.prompt}: Keep responses under 2 sentences`
-                                }
-                            ]
+                                },
+                            ],
                         })
+
+                        //8:39:58
+                        if(smart_ai_message.choices[0].message.content) {
+                            const reveiver = createChatHistory(
+                                automation.id,
+                                webhook_payload.entry[0].id,
+                                webhook_payload.entry[0].messaging[0].sender.id,
+                                webhook_payload.entry[0].messaging[0].message.text
+                            )
+                        }
                     }
                 }
             }
