@@ -103,43 +103,41 @@ export const getKeywordPost = async (postId: string, automationId: string) => {
 }
 
 
-//THIS NEEDS TO BE LOOKED INTO
-export const getChatHistory = async (recipientId: string, senderId: string) => {
-    const chats = await client.automation.findFirst({
+//NEEDS to be looked into
+// New function to get chat history
+export const getChatHistory = async (senderid: string, reveiver: string) => {
+    const messages = await client.dms.findMany({
         where: {
-            dms: {
-                some: {
-                    AND: [
-                        { receiver: senderId },
-                        { senderId: recipientId }
-                    ]
-                }
-            }
+            senderId: senderid, 
+            receiver: reveiver,
+        },
+        orderBy: {
+            createdAt: 'asc',
         },
         select: {
+            message: true,
             id: true,
-            dms: {
-                select: {
-                    message: true,
-                    createdAt: true,
-                    senderId: true,
-                    receiver: true
-                },
-                orderBy: {
-                    createdAt: 'asc'
-                }
-            }
-        }
+            senderId: true, // Include senderId to potentially infer role later if needed
+            automationId: true,
+        },
     });
 
-    // Format the chat history for OpenAI conversation
-    const history = chats?.dms.map(chat => ({
-        role: chat.senderId === recipientId ? 'assistant' : 'user',
-        content: chat.message
-    })) ?? [];
+    if (!messages || messages.length === 0) {
+        return { history: [], automationId: null };
+    }
 
+    // Assuming sequential storage: User message first, then Assistant reply.
+    // This might be inaccurate if multiple messages of one type arrive consecutively.
+    const history = messages.map((msg, index) => ({
+        role: index % 2 === 0 ? ('user' as const) : ('assistant' as const), // Assign roles based on order
+        content: msg.message || '',
+    }));
+
+    // Return the formatted history and the automationId from the first message
     return {
-        automationId: chats?.id,
-        history
+        history: history,
+        automationId: messages[0].automationId,
     };
 }
+
+

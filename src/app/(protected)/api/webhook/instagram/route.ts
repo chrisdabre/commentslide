@@ -1,6 +1,6 @@
 import { findAutomation } from "@/actions/automations/queries";
 import { createChatHistory, getChatHistory, getKeywordAutomation, getKeywordPost, matchKeyword, trackResponses } from "@/actions/webhook/queries";
-import { sendDM } from "@/lib/fetch";
+import { sendDM, sendPrivateMessage } from "@/lib/fetch";
 import { client } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
@@ -144,9 +144,9 @@ export async function POST(req: NextRequest) {
                 if (automation && automations_post && automation.trigger) {
                     if(automation.listener) {
                         if (automation.listener.listener === 'MESSAGE') {
-                            const direct_message = await sendDM(
+                            const direct_message = await sendPrivateMessage(
                                 webhook_payload.entry[0].id,
-                                webhook_payload.entry[0].changes[0].value.from.id,
+                                webhook_payload.entry[0].changes[0].value.id,
                                 automation.listener?.prompt,
                                 automation.User?.Integrations[0].token!
                             )
