@@ -193,10 +193,11 @@ export async function POST(req: NextRequest) {
 
                                 await client.$transaction([receiver, sender])
 
-                                const direct_message = await sendDM(
+                                //todo to do: try implementing the 24 hour feature 9:50:00
+                                const direct_message = await sendPrivateMessage(
                                     webhook_payload.entry[0].id,
-                                    webhook_payload.entry[0].changes[0].value.from.id,
-                                    smart_ai_message.choices[0].message.content,
+                                    webhook_payload.entry[0].changes[0].value.id,
+                                    automation.listener?.prompt,
                                     automation.User?.Integrations[0].token!
                                 )
 
@@ -291,7 +292,7 @@ export async function POST(req: NextRequest) {
                 {
                     message: 'No automation set',
                 },
-                { status: 404 }
+                { status: 200 }
             )
         }
 
@@ -300,7 +301,7 @@ export async function POST(req: NextRequest) {
                 message: 'No automation set',
             },
             {
-                status: 404
+                status: 200
             },
         )
 
@@ -309,7 +310,10 @@ export async function POST(req: NextRequest) {
             {
                 message: 'No automation set',
             },
-            { status: 500 }
+            { status: 200 }
         )
     }
 }
+
+//Setting all the status to 200 because if we set it to 404 or 500, instagram will thing that the
+//webhook failed and it will send it every few seconds and that will get us banned
