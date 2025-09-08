@@ -9,3 +9,6 @@ After cloning the repository:
 ```npx prisma generate```
 
 This will generate all necessary Prisma files locally.
+
+
+Architecture diagram coming soon
