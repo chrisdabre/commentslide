@@ -16,10 +16,7 @@ jobs:
       
     - name: Print success message
       run: echo "hey this worked"
-  build-and-test:
-    runs-on: [my-runners-6]
 
-    steps:
     - uses: actions/checkout@v4 # Checks out your repository code
       name: Checkout Code
 
