@@ -1,4 +1,4 @@
-name: Basic CI Workflow
+name: Basic Test Workflow
 
 on:
   schedule:
@@ -7,6 +7,15 @@ on:
   workflow_dispatch: # Allow manual trigger
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Print success message
+      run: echo "hey this worked"
   build-and-test:
     runs-on: [my-runners-6]
 
