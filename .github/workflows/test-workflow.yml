@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest # Runs on an Ubuntu virtual machine
+    runs-on: [my-runners-6]
 
     steps:
     - uses: actions/checkout@v4 # Checks out your repository code
