@@ -1,4 +1,4 @@
-name: Reset Billing Cycles
+name: Basic CI Workflow
 
 on:
   schedule:
@@ -7,28 +7,20 @@ on:
   workflow_dispatch: # Allow manual trigger
 
 jobs:
-  reset-billing-cycles:
-    runs-on: [my-runners-6]
-    
-    steps:
-      - name: Call Reset Billing Cycles Function
-        env:
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-        run: |
-          response=$(curl -s -X POST \
-            "https://azcoimamdsdsyjqsduaizxgn.supabase.co/functions/v1/reset-billing-cycles" \
-            -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
-            -H 'Content-Type: application/json' \
-            --data '{"name":"Functions"}')
-          
-          if [[ $(echo $response | jq -r .success) == "true" ]]; then
-            echo "Successfully reset billing cycles"
-            echo "Response: $response"
-          else
-            echo "Failed to reset billing cycles"
-            echo "Response: $response"
-            exit 1
-          fi
+  build-and-test:
+    runs-on: ubuntu-latest # Runs on an Ubuntu virtual machine
 
-      - name: Log Result
-        run: echo "Billing cycles reset job completed"
+    steps:
+    - uses: actions/checkout@v4 # Checks out your repository code
+      name: Checkout Code
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Specifies the Node.js version
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
